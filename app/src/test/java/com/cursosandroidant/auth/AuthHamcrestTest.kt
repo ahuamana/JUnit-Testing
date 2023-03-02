@@ -2,7 +2,7 @@ package com.cursosandroidant.auth
 
 
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
+import org.hamcrest.Matchers.*
 import org.junit.Ignore
 import org.junit.Test
 
@@ -83,6 +83,38 @@ class AuthHamcrestTest {
         val isAuthenticate = userAuthenticationTDD("nt@gmail.com", "123")
         assertThat(AuthEvent.INVALID_LENGTH_PASSWORD, `is` (isAuthenticate))
     }
+
+    @Test
+    fun checkNames_differentUsers_match() {
+        assertThat("Antonio", both(containsString("A")).and(containsString("n")))
+    }
+
+    @Test
+    fun checkData_emailPassword_noMatch() {
+        val email = "nt@gmail.com"
+        val password = "1234"
+        assertThat(email, not(`is`(password)))
+    }
+
+    @Test
+    fun checkExist_newEmail_returnsString() {
+        val oldEmail = "nt@gmail.com"
+        val newEmail = "nta@gmail.com"
+        val emails = arrayOf(oldEmail, newEmail)
+        assertThat(emails, hasItemInArray(newEmail))
+    }
+
+    @Test
+    fun checkDomain_arrayEmails_returnsString() {
+        val nextEmail = "alain@hotmail.com"
+        val oldEmail = "nt@gmail.com"
+        val newEmail = "nta@gmail.com"
+        val emails = arrayListOf(oldEmail, newEmail)
+        assertThat(emails, everyItem(endsWith("@gmail.com")))
+
+    }
+
+
 
 
 }
