@@ -17,6 +17,8 @@ class AuthAlTest {
         password = "1234"
     }
 
+    //Pruebas Inversas
+
     @Test
     fun login_completeFrom_existUser_returnsSuccessEvent() {
         val isAuthenticate = userAuthenticationTDD(email, password)
